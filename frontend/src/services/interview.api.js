@@ -2,7 +2,7 @@ import axios from "axios"
 
 // ✅ axios instance
 const API = axios.create({
-    baseURL: "http://localhost:5000/api"
+    baseURL: "https://prepgenius-xrx9.onrender.com/"
 })
 
 // ✅ token automatically attach hoga
