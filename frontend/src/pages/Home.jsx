@@ -15,34 +15,40 @@ const [selectedFile, setSelectedFile] = useState(null)
 const handleGenerateReport = async (e) => {
   e.preventDefault()
 
-  if (loading) return  // 🔥 prevents double click
+  if (loading) return
 
   console.log("BUTTON CLICKED")
 
-  const resumeFile = selectedFile
-
-  console.log("FILE 👉", resumeFile)
-
-  if (!resumeFile && !selfDescription) {
+  if (!selectedFile && !selfDescription) {
     alert("Upload resume or write self description")
     return
   }
 
- const data = await generateReport({
-  jobDescription,
-  selfDescription,
-  resumeFile
-})
+  // 🔥 IMPORTANT FIX
+  const formData = new FormData()
+  formData.append("jobDescription", jobDescription)
+  formData.append("selfDescription", selfDescription)
 
-console.log("RESPONSE 👉", data)
+  if (selectedFile) {
+    formData.append("resume", selectedFile)
+  }
 
-// 🔥 fix navigation
-if (data && (data._id || data.id)) {
-  const id = data._id || data.id
-  navigate(`/interview/${id}`)
-} else {
-  console.error("❌ ID not found in response", data)
-}
+  console.log("FORM DATA 👉", [...formData])
+
+  try {
+    const data = await generateReport(formData)
+
+    console.log("RESPONSE 👉", data)
+
+    if (data && (data._id || data.id)) {
+      const id = data._id || data.id
+      navigate(`/interview/${id}`)
+    } else {
+      console.error("❌ ID not found in response", data)
+    }
+  } catch (err) {
+    console.error("❌ API ERROR", err)
+  }
 }
     if (loading) {
         return (
