@@ -23,7 +23,7 @@ function Login() {
 
       alert("Login Successful");
 
-      navigate("/dashboard"); // 🔥 redirect after login
+      navigate("/home"); // 🔥 redirect after login
     } catch (err) {
       alert(err.response?.data?.message || "Error");
     }
