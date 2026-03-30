@@ -21,6 +21,7 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
+app.options("*", cors());
 
 // ✅ JSON parser
 app.use(express.json());
