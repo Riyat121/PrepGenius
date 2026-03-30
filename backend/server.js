@@ -1,13 +1,17 @@
 import dotenv from "dotenv";
 import express from "express";
-const app = express();
+import cors from "cors";
+
 import connectDB from "./src/config/db.js";
 import authRoutes from "./src/routes/authRoutes.js";
 import interviewRoutes from "./src/routes/interviewRoutes.js";
- // load env variables
-import cors from "cors";
-const PORT = process.env.PORT || 5000;
+
 dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// ✅ CORS ONLY ONCE
 app.use(cors({
   origin: [
     "http://localhost:5173",
@@ -18,17 +22,21 @@ app.use(cors({
   credentials: true
 }));
 
+// ✅ JSON parser
 app.use(express.json());
-app.use(cors()); 
-// connect to database
-connectDB();
-console.log("Connected to MongoDB");
 
+// ❌ REMOVE THIS LINE (IMPORTANT)
+// app.use(cors());
+
+
+// connect DB
+connectDB();
+
+// routes
 app.use("/api/auth", authRoutes);
 app.use("/api/interview", interviewRoutes);
+
 // start server
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
-  console.log(typeof pdfParse);
-  
 });
