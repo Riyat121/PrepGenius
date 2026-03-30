@@ -19,7 +19,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
-
+app.use(cors()); 
 // connect to database
 connectDB();
 console.log("Connected to MongoDB");
