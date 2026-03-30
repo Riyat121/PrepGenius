@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 // ✅ SIMPLE CORS (WORKING)
 
 
-import cors from "cors"
+
 
 app.use(cors({
   origin: [
