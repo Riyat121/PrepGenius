@@ -14,8 +14,14 @@ const PORT = process.env.PORT || 5000;
 // ✅ SIMPLE CORS (WORKING)
 
 
+import cors from "cors"
+
 app.use(cors({
-  origin: "https://prep-genius-9ralkorjh-riyat121s-projects.vercel.app",
+  origin: [
+    "http://localhost:5173",
+    "https://prep-genius-9ralkorjh-riyat121s-projects.vercel.app"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }))
 
