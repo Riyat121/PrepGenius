@@ -26,12 +26,13 @@ export const getAllInterviewReports = async () => {
 
 // ✅ GENERATE report
 export const generateInterviewReport = async (formData) => {
-    const { data } = await API.post("/interview", formData, {
-        headers: {
-            "Content-Type": "multipart/form-data"
-        }
-    })
-    return data
+    try {
+        const { data } = await API.post("/interview", formData)
+        return data
+    } catch (error) {
+        console.error("API ERROR:", error.response?.data || error.message)
+        throw error
+    }
 }
 
 
