@@ -26,14 +26,10 @@ app.use(cors({
   credentials: true
 }));
 
-// ✅ JSON parser
 app.use(express.json());
 
-// connect DB
 connectDB();
-app.options("*", cors());
 
-// routes
 app.use("/api/auth", authRoutes);
 app.use("/api/interview", interviewRoutes);
 
