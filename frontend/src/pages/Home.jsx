@@ -28,15 +28,21 @@ const handleGenerateReport = async (e) => {
     return
   }
 
-  const data = await generateReport({
-    jobDescription,
-    selfDescription,
-    resumeFile
-  })
+ const data = await generateReport({
+  jobDescription,
+  selfDescription,
+  resumeFile
+})
 
-  if (data?._id) {
-    navigate(`/interview/${data._id}`)
-  }
+console.log("RESPONSE 👉", data)
+
+// 🔥 fix navigation
+if (data && (data._id || data.id)) {
+  const id = data._id || data.id
+  navigate(`/interview/${id}`)
+} else {
+  console.error("❌ ID not found in response", data)
+}
 }
     if (loading) {
         return (
