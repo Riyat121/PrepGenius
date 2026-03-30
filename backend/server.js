@@ -12,7 +12,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // ✅ SIMPLE CORS (WORKING)
-import cors from "cors"
+
 
 app.use(cors({
   origin: "https://prep-genius-9ralkorjh-riyat121s-projects.vercel.app",
