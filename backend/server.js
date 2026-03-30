@@ -9,7 +9,12 @@ import cors from "cors";
 const PORT = process.env.PORT || 5000;
 dotenv.config();
 app.use(cors({
-  origin: "https://prep-genius-ashen.vercel.app", // your frontend URL
+  origin: [
+    "http://localhost:5173",
+    "https://prep-genius-ashen.vercel.app",
+    "https://prep-genius-9ralkorjh-riyat121s-projects.vercel.app"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 
