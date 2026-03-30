@@ -8,42 +8,45 @@ import InterviewReport from "../models/interviewReportModel.js";
 // ✅ GENERATE INTERVIEW REPORT
 async function generateInterViewReportController(req, res) {
   try {
-    if (!req.file) {
-      return res.status(400).json({
-        message: "Resume file is required",
-      });
+    let resumeContent = { text: "" }
+
+    if (req.file) {
+      resumeContent = await pdf(req.file.buffer)
     }
 
-    const resumeContent = await pdf(req.file.buffer);
+    const { selfDescription, jobDescription } = req.body
 
-    const { selfDescription, jobDescription } = req.body;
+    if (!selfDescription && !req.file) {
+      return res.status(400).json({
+        message: "Either resume or self description is required"
+      })
+    }
 
     const interViewReportByAi = await generateInterviewReport({
       resume: resumeContent.text,
       selfDescription,
       jobDescription
-    });
+    })
 
-    // ✅ FIXED MODEL USAGE
     const interviewReport = await InterviewReport.create({
       user: req.user.id,
       resume: resumeContent.text,
       selfDescription,
       jobDescription,
       ...interViewReportByAi
-    });
+    })
 
     res.status(201).json({
       message: "Interview report generated successfully.",
       interviewReport
-    });
+    })
 
   } catch (error) {
-    console.log("Controller FULL Error 👉", error);
+    console.log("Controller Error 👉", error)
     res.status(500).json({
       message: "Failed to generate interview report.",
       error: error.message
-    });
+    })
   }
 }
 
