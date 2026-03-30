@@ -36,7 +36,11 @@ const handleGenerateReport = async (e) => {
   console.log("FORM DATA 👉", [...formData])
 
   try {
-    const data = await generateReport(formData)
+  const data = await generateReport({
+  jobDescription,
+  selfDescription,
+  resumeFile: selectedFile
+})
 
     console.log("RESPONSE 👉", data)
 
