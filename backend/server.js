@@ -32,11 +32,7 @@ app.use(express.json());
 // connect DB
 connectDB();
 app.options("*", cors());
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://prep-genius-ashen.vercel.app");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  next();
-});
+
 // routes
 app.use("/api/auth", authRoutes);
 app.use("/api/interview", interviewRoutes);
