@@ -12,9 +12,12 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // ✅ SIMPLE CORS (WORKING)
+import cors from "cors"
+
 app.use(cors({
-  origin: "*"
-}));
+  origin: "https://prep-genius-9ralkorjh-riyat121s-projects.vercel.app",
+  credentials: true
+}))
 
 // ✅ JSON parser
 app.use(express.json());
