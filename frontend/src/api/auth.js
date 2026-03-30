@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://prepgenius-xrx9.onrender.com/auth",
+  baseURL: "https://prepgenius-xrx9.onrender.com/api/auth",
 });
 
 // Register
