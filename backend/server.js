@@ -26,7 +26,9 @@ app.use(cors({
   credentials: true
 }));
 
-app.options("*", cors()); // 🔥 THIS FIXES PREFLIGHT
+app.use((req, res) => {
+  res.status(404).send("Not found");
+}); 
 
 app.use(express.json());
 
