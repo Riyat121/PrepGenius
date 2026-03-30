@@ -11,24 +11,13 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ✅ CORS ONLY ONCE
+// ✅ SIMPLE CORS (WORKING)
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://prep-genius-ashen.vercel.app",
-    "https://prep-genius-9ralkorjh-riyat121s-projects.vercel.app"
-  ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
+  origin: "*"
 }));
-app.options("*", cors());
 
 // ✅ JSON parser
 app.use(express.json());
-
-// ❌ REMOVE THIS LINE (IMPORTANT)
-// app.use(cors());
-
 
 // connect DB
 connectDB();
